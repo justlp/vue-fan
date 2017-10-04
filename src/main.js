@@ -3,14 +3,15 @@
 // (runtime-only or standalone) has been set in webpack.base.conf with an alias.
 import Vue from 'vue'
 
-
 new Vue({
     el: '#app',
     components: {
         'comment': {
-            data: function () { return {
-                hasWhitespaceInsideMarkers: true
-            } },
+            data: function () {
+                return {
+                    hasWhitespaceInsideMarkers: true
+                }
+            },
             template: '<span class="comment">' +
             '<span class="comment__open-marker">/*</span>' +
             '<mark v-if="hasWhitespaceInsideMarkers">&nbsp;</mark>' +
@@ -26,6 +27,70 @@ new Vue({
                 }
             },
             template: '<span class="selector">{{ name }}</span>'
+        },
+        'attribute-selector': {
+            data: function () {
+                return {
+                    name: 'title'
+                }
+            },
+            template: '<span class="attribute-selector">[{{ name }}]</span>'
+        },
+        'pseudo-class': {
+            data: function () {
+                return {
+                    name: 'hover'
+                }
+            },
+            template: '<span class="pseudo-class">' +
+                '<span class="pseudo-class__single-notation">:</span>' +
+                '<span class="pseudo-class__name">{{ name }}</span>' +
+            '</span>'
+        },
+        'pseudo-element': {
+            data: function () {
+
+                return {
+                    name: 'after',
+                    isSingleNotation: true,
+                    vendorPrefix: 'hz' // todo: get getBrowserPrefix from vendor-prefix component
+                }
+            },
+            template: '<span class="pseudo-element" >' +
+                '<span class="pseudo-element__single-notation" v-if="isSingleNotation">:</span>' +
+                '<span class="pseudo-element__single-notation" v-else>::</span>' +
+                '<span class="pseudo-element__name">{{ name }}</span>' +
+            '</span>'
+        },
+        'vendor-prefix': {
+            data: function () {
+                return {
+                    browser: 'chrome'
+                }
+            },
+            computed: {
+                getBrowserPrefix: function () {
+                    var prefixList = {
+                        chrome: '-webkit-',
+                        firefox: '-moz-',
+                        ie: {
+                            colon: '::',
+                            standard: '-ms-'
+                        },
+                        opera: '-o-',
+                        default: 'def'
+                    };
+                    if (typeof this.browser !== 'string' && this.browser.name && this.browser.name === 'ie') {
+                        if (this.isColon) {
+                            return prefixList.ie.colon
+                        } else {
+                            return prefixList.ie.standard
+                        }
+                    }
+                    return typeof prefixList[this.browser] !== 'undefined' ? prefixList[this.browser] : prefixList.default
+                }
+            },
+            template: '<span class="vendor-prefix">{{ getBrowserPrefix }}</span>'
         },
         'property': {
             data: function () {
