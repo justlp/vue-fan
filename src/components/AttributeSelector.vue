@@ -1,6 +1,6 @@
-<tempalte>
+<template>
     <span class="attribute-selector">[{{ name }}]</span>
-</tempalte>
+</template>
 
 <script>
     export default {

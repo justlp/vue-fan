@@ -1,6 +1,6 @@
-<tempate>
+<template>
     <span class="selector">{{ name }}</span>
-</tempate>
+</template>
 
 <script>
     export default {

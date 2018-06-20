@@ -1,6 +1,6 @@
-<temlate>
+<template>
     <!--<span class="vendor-prefix">{{ getBrowserPrefix }}</span>-->
-</temlate>
+</template>
 
 <script>
 //  'pseudo-element': {

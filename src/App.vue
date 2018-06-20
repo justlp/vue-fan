@@ -2,14 +2,10 @@
   <div id="app">
     <img src="./assets/logo.png">
     <router-view></router-view>
-
-    <world></world>
   </div>
 </template>
 
 <script>
-var t = 'test';
-console.log('test')
 export default {
   name: 'app'
 }

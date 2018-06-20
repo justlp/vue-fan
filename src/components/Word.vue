@@ -1,10 +1,10 @@
 <template>
-  <li>{{ todo.text }}</li>
+  <li>word</li>
 </template>
 
 <script>
 export default {
-  name: 'world',
+  name: 'word',
   props: ['todo']
 }
 </script>
