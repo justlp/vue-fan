@@ -1,5 +1,12 @@
 <template>
   <div class="index">
+
+    todo:
+    <ul>
+      <li> split components on selector types <a href="https://www.sitepoint.com/css-selectors/">https://www.sitepoint.com/css-selectors/</a>. </li>
+      <li> add component for CSS rule</li>
+    </ul>
+
     attribute-selector:
     <attribute-selector></attribute-selector>
 
