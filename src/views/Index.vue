@@ -1,9 +1,11 @@
 <template>
   <div class="index">
 
+    <a href="https://stylelint.io/demo/" target="_blank">demo</a>
+
     todo:
     <ul>
-      <li> split components on selector types <a href="https://www.sitepoint.com/css-selectors/">https://www.sitepoint.com/css-selectors/</a>. </li>
+      <li> split components on selector types <a href="https://www.sitepoint.com/css-selectors/" target="_blank">https://www.sitepoint.com/css-selectors/</a>. </li>
       <li> add component for CSS rule</li>
     </ul>
 
