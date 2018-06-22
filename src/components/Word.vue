@@ -1,11 +1,10 @@
-<template>
-  <li>word</li>
+<template lang="pug">
+  li word
 </template>
 
 <script>
 export default {
-  name: 'word',
-  props: ['todo']
+  name: 'word'
 }
 </script>
 
