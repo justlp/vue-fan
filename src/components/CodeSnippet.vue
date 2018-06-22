@@ -30,6 +30,9 @@
           `${blockCls}--${this.type}`
         ]
       }
+    },
+    mounted () {
+//      console.log(this)
     }
   }
 </script>
