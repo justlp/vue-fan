@@ -1,33 +1,67 @@
-<template>
-    <span class="property">
-        <span class="property__name">{{ name }}</span>
-        <mark class="mark" v-if="hasSpaceBeforeColon">&nbsp;</mark>
-        <span class="property__colon">:</span>
-        <mark class="mark" v-if="hasSpaceAfterColon">&nbsp;</mark>
-        <span class="property__value">{{ value }}</span>
-        <span class="property__important" v-if="isImportant">!important</span>
-        <span class="property__semicolon" v-if="isSemicolon">;</span>
+<template lang="pug">
+    span.property
+      span.property__indent
+      span.property__name {{ name }}
+      mark(class="mark", v-if="indentBetweenColon", :style="indentBetweenColonStyles") &nbsp;
+      span.property__colon :
+      mark(class="mark", v-if="indentBetweenColon", :style="indentBetweenColonStyles") &nbsp;
+      span.property__value {{ value }}
+      span(class="property__important", v-if="isImportant") !important
+      span(class="property__semicolon", v-if="isSemicolon") ;
     </span>
 </template>
 
 <script>
-    export default {
-      name: 'property',
-      data: function () {
+  export default {
+    name: 'property',
+    props: {
+      name: {
+        type: String,
+        required: true
+      },
+      value: {
+        type: String,
+        required: true
+      },
+      isImportant: {
+        type: Boolean,
+        default: false
+      },
+      isSemicolon: {
+        type: Boolean,
+        default: true
+      },
+      indent: {
+        type: Number,
+        default: 2
+      },
+      indentBetweenColon: {
+        type: Number,
+        default: 0
+      }
+    },
+    data: function () {
+      return {}
+    },
+    computed: {
+      indentBetweenColonStyles () {
         return {
-          name: 'color', // or put another component
-          value: '#fff', // or put another component
-          isSemicolon: true,
-          isImportant: true,
-          hasSpaceBeforeColon: true,
-          hasSpaceAfterColon: true
+          width: `${this.indentBetweenColon}px`
         }
       }
+    },
+    methods: {
+      transformedCssProperties (settings) {
+        return this.properties.map((property) => {
+          return property
+        })
+      }
     }
+  }
 </script>
 
 <style scoped>
-    span{
-        font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
-    }
+  span {
+    font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
+  }
 </style>
