@@ -10,8 +10,29 @@
                 template(slot="selector") a
                 template(slot="declaration-block")
                   declaration-block(:properties="cssProperties")
-          el-col(:span="12") 2
-            el-button(@click="changingCssPropertiesHandle") s
+
+                  | if comment-no-empty = true
+
+                  el-radio-group(v-model="commentNoEmpty", v-on:change="changingCssPropertiesHandle")
+                    el-radio-button(label="true")
+                    el-radio-button(label="false")
+
+                  el-alert(:title="commentNoEmpty === 'true' ? 'good' : 'bad'",
+                           :type="commentNoEmpty === 'true' ? 'success' : 'error'",
+                           :closable="false")
+                    template(v-if="commentNoEmpty === 'true'")
+                      comment(message=" comment ")
+                      | or
+                      comment(message="\n * Multi-line \Comment \n *")
+                    template(v-else)
+                      comment
+                      | or
+                      comment(message=" ")
+                      | or
+                      comment(message="\n \n")
+
+          el-col(:span="12")
+            el-button(@click="changingCssPropertiesHandle") Reverse
 
 </template>
 
@@ -20,6 +41,7 @@
 </style>
 
 <script>
+  import Comment from '../components/Comment.vue'
   import CodeSnippet from '../components/CodeSnippet.vue'
   import CssRule from '../components/CssRule'
   import DeclarationBlock from '../components/DeclarationBlock'
@@ -27,12 +49,14 @@
   export default {
     name: 'Index',
     components: {
+      Comment,
       CodeSnippet,
       CssRule,
       DeclarationBlock
     },
     data: function () {
       return {
+        commentNoEmpty: 'false',
         cssProperties: [
           {
             name: 'color',
@@ -48,8 +72,8 @@
       }
     },
     methods: {
-      changingCssPropertiesHandle () {
-        console.log('ss')
+      changingCssPropertiesHandle (e) {
+        console.log(this.commentNoEmpty, 'ss')
       }
     }
   }

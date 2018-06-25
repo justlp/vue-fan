@@ -1,26 +1,33 @@
-<template>
-    <span class="comment">
-        <span class="comment__open-marker">*</span>
-        <mark v-if="hasWhitespaceInsideMarkers">&nbsp;</mark>
-        <span class="comment__content">comment</span>
-        <mark v-if="hasWhitespaceInsideMarkers">&nbsp;</mark>
-        <span class="comment__close-marker">*/</span>
-    </span>
+<template lang="pug">
+    pre.comment /*{{message}}*/
 </template>
+
+if comment-no-empty = true
+  bad    /**/
+  bad    /* */
+  bad    /*
+
+         */
+
+  good   /* comment */
+  good   /*
+          * Multi-line Comment
+          **/
+
+
+
 
 <script>
   export default {
     name: 'comment',
-    data: function () {
-      return {
-        hasWhitespaceInsideMarkers: true
+    props: {
+      message: {
+        type: String
       }
     }
   }
 </script>
 
-<style scoped>
-    span {
-        font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
-    }
+<style lang="scss">
+
 </style>
