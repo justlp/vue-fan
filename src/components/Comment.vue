@@ -1,21 +1,9 @@
 <template lang="pug">
-    pre.comment /*{{message}}*/
+    pre.comment
+      | /*
+      slot {{message}}
+      | */
 </template>
-
-if comment-no-empty = true
-  bad    /**/
-  bad    /* */
-  bad    /*
-
-         */
-
-  good   /* comment */
-  good   /*
-          * Multi-line Comment
-          **/
-
-
-
 
 <script>
   export default {

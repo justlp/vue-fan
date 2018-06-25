@@ -11,34 +11,65 @@
                 template(slot="declaration-block")
                   declaration-block(:properties="cssProperties")
 
-                  | if comment-no-empty = true
+                  | Possible errors
+                  | Comment
+                  | if comment-no-empty = true/false
 
                   el-radio-group(v-model="commentNoEmpty", v-on:change="changingCssPropertiesHandle")
                     el-radio-button(label="true")
                     el-radio-button(label="false")
 
 
-                  template(v-if="commentNoEmpty === 'true'")
-                    el-alert(title="good", type="success", :closable="false")
-                      comment(message=" comment ")
-                      | or
-                      comment(message="\n * Multi-line \Comment \n *")
-                    el-alert(title="bad", type="error", :closable="false")
-                      comment
-                      | or
-                      comment(message=" ")
-                      | or
-                      comment(message="\n \n")
-                  template(v-else)
-                    el-alert(title="good", type="success", :closable="false")
-                      comment(message=" comment ")
-                      | or
-                      comment(message="\n * Multi-line \Comment \n *")
-                      comment
-                      | or
-                      comment(message=" ")
-                      | or
-                      comment(message="\n \n")
+                  el-alert(title="good", type="success", :closable="false")
+                    comment(message=" comment ")
+                    | or
+                    comment(message="\n * Multi-line \Comment \n *")
+                  el-alert(:title="commentNoEmpty === 'true' ? 'good' : 'bad'", :type="commentNoEmpty === 'true' ? 'success' : 'error'", :closable="false")
+                    comment
+                    | or
+                    comment(message=" ")
+                    | or
+                    comment(message="\n \n")
+
+                  | Possible errors
+                  | General / Sheet
+
+                  el-radio-group(v-model="noInvalidDoubleSlashComments", v-on:change="changingCssPropertiesHandle")
+                    el-radio-button(label="true")
+                    el-radio-button(label="false")
+
+                  el-alert(title="good", type="success", :closable="false")
+                    css-rule
+                      template(slot="selector") a
+                      template(slot="declaration-block")
+                        comment
+                          declaration-block(:properties="cssProperties")
+                    | or
+
+                    comment
+                      css-rule
+                        template(slot="selector") a
+                        template(slot="declaration-block")
+                          declaration-block(:properties="cssProperties")
+
+                  el-alert(:title="noInvalidDoubleSlashComments === 'true' ? 'bad' : 'good' ", :type="noInvalidDoubleSlashComments === 'true' ? 'error' : 'success'", :closable="false")
+                    css-rule
+                      template(slot="selector") a
+                      template(slot="declaration-block")
+                        | //
+                        declaration-block(:properties="cssProperties")
+                    | or
+
+                    css-rule
+                      | //
+                      template(slot="selector") a
+                      template(slot="declaration-block")
+                        declaration-block(:properties="cssProperties")
+
+
+
+
+
 
 
           el-col(:span="12")
@@ -67,6 +98,7 @@
     data: function () {
       return {
         commentNoEmpty: 'false',
+        noInvalidDoubleSlashComments: 'false',
         cssProperties: [
           {
             name: 'color',
