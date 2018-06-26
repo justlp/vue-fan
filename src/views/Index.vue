@@ -196,6 +196,7 @@
 
 
           el-col(:span="12")
+            | https://medium.com/@kevin_peters/unit-testing-vue-js-components-with-jest-86e14ef499da
             el-button(@click="handleChangingCssProperties") Reverse
 
 </template>
