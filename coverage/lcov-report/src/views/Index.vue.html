@@ -294,19 +294,7 @@
 <a name='L246'></a><a href='#L246'>246</a>
 <a name='L247'></a><a href='#L247'>247</a>
 <a name='L248'></a><a href='#L248'>248</a>
-<a name='L249'></a><a href='#L249'>249</a>
-<a name='L250'></a><a href='#L250'>250</a>
-<a name='L251'></a><a href='#L251'>251</a>
-<a name='L252'></a><a href='#L252'>252</a>
-<a name='L253'></a><a href='#L253'>253</a>
-<a name='L254'></a><a href='#L254'>254</a>
-<a name='L255'></a><a href='#L255'>255</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L249'></a><a href='#L249'>249</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -560,200 +548,194 @@
       el-header Header
       el-main
         el-row(type="flex", justify="middle", align="middle")
-          el-col(:span="12")
-            code-snippet(language="css", type="info")
+          el-col(:span="24")
+            el-tabs(tab-position="left")
+              el-tab-pane(label="comment-no-empty")
+                h3 comment-no-empty
+                comment-no-empty
+&nbsp;
+&nbsp;
+              el-tab-pane(label="User") d
+&nbsp;
+&nbsp;
+&nbsp;
+            hr
+&nbsp;
+            css-rule
+              template(slot="selector") a
+              template(slot="declaration-block")
+                declaration-block(:properties="cssProperties")
+&nbsp;
+            | Possible errors
+            | Comment
+            | if comment-no-empty = true/false
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;
+            | Possible errors
+            | General / Sheet
+&nbsp;
+            el-radio-group(v-model="noInvalidDoubleSlashComments")
+              el-radio-button(:label="true")
+              el-radio-button(:label="false")
+&nbsp;
+            el-alert(title="good", type="success", :closable="false")
               css-rule
+                template(slot="selector") a
+                template(slot="declaration-block")
+                  comment
+                    declaration-block(:properties="cssProperties")
+              | or
+&nbsp;
+              comment
+                css-rule
+                  template(slot="selector") a
+                  template(slot="declaration-block")
+                    declaration-block(:properties="cssProperties")
+&nbsp;
+            el-alert(:title="noInvalidDoubleSlashComments ? 'bad' : 'good' ", :type="noInvalidDoubleSlashComments ? 'error' : 'success'", :closable="false")
+              css-rule
+                template(slot="selector") a
+                template(slot="declaration-block")
+                  | //
+                  declaration-block(:properties="cssProperties")
+              | or
+&nbsp;
+              css-rule
+                | //
                 template(slot="selector") a
                 template(slot="declaration-block")
                   declaration-block(:properties="cssProperties")
 &nbsp;
-              | Possible errors
-              | Comment
-              | if comment-no-empty = true/false
+            | Limit language features
+            | Comment
+            | comment-word-blacklist:
 &nbsp;
-              el-radio-group(v-model="commentNoEmpty")
-                el-radio-button(:label="true")
-                el-radio-button(:label="false")
+            el-radio-group(v-model="commentWordBlacklist")
+              el-radio-button(label="1") ["foo", "bar"]
+              el-radio-button(label="2") ["/^TODO:/"]
+              el-radio-button(label="3") "foo"
+              el-radio-button(label="4") "/^TODO:/"
+              el-radio-button(:label="false")
 &nbsp;
+            | {{ commentWordBlacklist  }}
 &nbsp;
-              el-alert(title="good", type="success", :closable="false")
-                comment(message=" comment ")
-                | or
-                comment(message="\n * Multi-line \Comment \n *")
-              el-alert(:title="commentNoEmpty ? 'good' : 'bad'", :type="commentNoEmpty ? 'success' : 'error'", :closable="false")
-                comment
-                | or
-                comment(message=" ")
-                | or
-                comment(message="\n \n")
+            el-alert(title="good", type="success", :closable="false")
+              comment comment
+              comment tODO: comment
 &nbsp;
-              | Possible errors
-              | General / Sheet
+            el-alert(
+            :title="commentWordBlacklist === '1' || commentWordBlacklist === '3' ? 'bad' : 'good' ",
+            :type="commentWordBlacklist === '1' || commentWordBlacklist === '3' ? 'error' : 'success'",
+            :closable="false"
+            )
+              comment comment foo bar
 &nbsp;
-              el-radio-group(v-model="noInvalidDoubleSlashComments")
-                el-radio-button(:label="true")
-                el-radio-button(:label="false")
+            el-alert(
+            :title="commentWordBlacklist === '2' || commentWordBlacklist === '4' ? 'bad' : 'good' ",
+            :type="commentWordBlacklist  === '2' || commentWordBlacklist === '4' ? 'error' : 'success'",
+            :closable="false"
+            )
+              comment TODO: comment
 &nbsp;
-              el-alert(title="good", type="success", :closable="false")
-                css-rule
-                  template(slot="selector") a
-                  template(slot="declaration-block")
-                    comment
-                      declaration-block(:properties="cssProperties")
-                | or
+            | Stylistic issues
+            | Comment
+            | comment-empty-line-before:
 &nbsp;
-                comment
-                  css-rule
-                    template(slot="selector") a
-                    template(slot="declaration-block")
-                      declaration-block(:properties="cssProperties")
+            el-radio-group(v-model="commentEmptyLineBefore.option")
+              el-radio-button(label="always")
+              el-radio-button(label="never")
 &nbsp;
-              el-alert(:title="noInvalidDoubleSlashComments ? 'bad' : 'good' ", :type="noInvalidDoubleSlashComments ? 'error' : 'success'", :closable="false")
-                css-rule
-                  template(slot="selector") a
-                  template(slot="declaration-block")
-                    | //
-                    declaration-block(:properties="cssProperties")
-                | or
+            el-checkbox-group(v-model="commentEmptyLineBefore.secondaryOptions")
+              el-checkbox-button(label="except.first-nested")
+              el-checkbox-button(label="ignore.after-comment")
+              el-checkbox-button(label="ignore.stylelint-commands")
 &nbsp;
-                css-rule
-                  | //
-                  template(slot="selector") a
-                  template(slot="declaration-block")
-                    declaration-block(:properties="cssProperties")
+            el-alert(
+            :title="commentEmptyLineBefore.option === 'always' || commentEmptyLineBefore.option === 'never' ? 'good' : 'bad'",
+            :type="commentEmptyLineBefore.option === 'always' || commentEmptyLineBefore.option === 'never' ? 'success': 'error'",
+            :closable="false"
+            )
+              css-rule(style="display:inline-block;")
+                template(slot="selector") a
+              comment(style="display:inline-block;")
 &nbsp;
-              | Limit language features
-              | Comment
-              | comment-word-blacklist:
+            el-alert(
+            :title="commentEmptyLineBefore.option === 'always' ? 'good' : 'bad'",
+            :type="commentEmptyLineBefore.option === 'always' ? 'success': 'error'",
+            :closable="false"
+            )
+              css-rule
+                template(slot="selector") a
+              br
+              comment
 &nbsp;
-              el-radio-group(v-model="commentWordBlacklist")
-                el-radio-button(label="1") ["foo", "bar"]
-                el-radio-button(label="2") ["/^TODO:/"]
-                el-radio-button(label="3") "foo"
-                el-radio-button(label="4") "/^TODO:/"
-                el-radio-button(:label="false")
-&nbsp;
-              | {{ commentWordBlacklist  }}
-&nbsp;
-              el-alert(title="good", type="success", :closable="false")
-                comment comment
-                comment tODO: comment
-&nbsp;
-              el-alert(
-              :title="commentWordBlacklist === '1' || commentWordBlacklist === '3' ? 'bad' : 'good' ",
-              :type="commentWordBlacklist === '1' || commentWordBlacklist === '3' ? 'error' : 'success'",
-              :closable="false"
-              )
-                comment comment foo bar
-&nbsp;
-              el-alert(
-              :title="commentWordBlacklist === '2' || commentWordBlacklist === '4' ? 'bad' : 'good' ",
-              :type="commentWordBlacklist  === '2' || commentWordBlacklist === '4' ? 'error' : 'success'",
-              :closable="false"
-              )
-                comment TODO: comment
-&nbsp;
-              | Stylistic issues
-              | Comment
-              | comment-empty-line-before:
-&nbsp;
-              el-radio-group(v-model="commentEmptyLineBefore.option")
-                el-radio-button(label="always")
-                el-radio-button(label="never")
-&nbsp;
-              el-checkbox-group(v-model="commentEmptyLineBefore.secondaryOptions")
-                el-checkbox-button(label="except.first-nested")
-                el-checkbox-button(label="ignore.after-comment")
-                el-checkbox-button(label="ignore.stylelint-commands")
-&nbsp;
-              el-alert(
-                :title="commentEmptyLineBefore.option === 'always' || commentEmptyLineBefore.option === 'never' ? 'good' : 'bad'",
-                :type="commentEmptyLineBefore.option === 'always' || commentEmptyLineBefore.option === 'never' ? 'success': 'error'",
-                :closable="false"
-                )
-                css-rule(style="display:inline-block;")
-                  template(slot="selector") a
-                comment(style="display:inline-block;")
-&nbsp;
-              el-alert(
-                :title="commentEmptyLineBefore.option === 'always' ? 'good' : 'bad'",
-                :type="commentEmptyLineBefore.option === 'always' ? 'success': 'error'",
-                :closable="false"
-              )
-                css-rule
-                  template(slot="selector") a
-                br
-                comment
-&nbsp;
-              el-alert(
-                :title="commentEmptyLineBefore.option === 'never' ? 'good' : 'bad'",
-                :type="commentEmptyLineBefore.option === 'never' ? 'success': 'error'",
-                :closable="false"
-              )
-                css-rule
-                  template(slot="selector") a
-                comment
+            el-alert(
+            :title="commentEmptyLineBefore.option === 'never' ? 'good' : 'bad'",
+            :type="commentEmptyLineBefore.option === 'never' ? 'success': 'error'",
+            :closable="false"
+            )
+              css-rule
+                template(slot="selector") a
+              comment
 &nbsp;
 &nbsp;
-              el-alert(
-                :title="commentEmptyLineBefore.secondaryOptions.indexOf('except.first-nested') !== -1 ? 'bad' : 'good'",
-                :type="commentEmptyLineBefore.secondaryOptions.indexOf('except.first-nested') !== -1 ? 'error' : 'success'"
-              )
-                css-rule
-                  template(slot="selector") a
-                  template(slot="declaration-block")
-                    div(v-if="commentEmptyLineBefore.secondaryOptions.indexOf('except.first-nested') !== -1", style="background: red;") s
-                    comment
-                    declaration-block(:properties="cssProperties")
+            el-alert(
+            :title="commentEmptyLineBefore.secondaryOptions.indexOf('except.first-nested') !== -1 ? 'bad' : 'good'",
+            :type="commentEmptyLineBefore.secondaryOptions.indexOf('except.first-nested') !== -1 ? 'error' : 'success'"
+            )
+              css-rule
+                template(slot="selector") a
+                template(slot="declaration-block")
+                  div(v-if="commentEmptyLineBefore.secondaryOptions.indexOf('except.first-nested') !== -1", style="background: red;") s
+                  comment
+                  declaration-block(:properties="cssProperties")
 &nbsp;
-              el-alert(
-                :title="commentEmptyLineBefore.option === 'always' &amp;&amp; commentEmptyLineBefore.secondaryOptions.indexOf('ignore.after-comment') !== -1 ? 'good' : 'bad'",
-                :type="commentEmptyLineBefore.option === 'always' &amp;&amp; commentEmptyLineBefore.secondaryOptions.indexOf('ignore.after-comment') !== -1 ? 'success': 'error'",
-                :closable="false"
-              )
-                css-rule
-                  template(slot="selector") a
-                br
-                comment
-                comment
+            el-alert(
+            :title="commentEmptyLineBefore.option === 'always' &amp;&amp; commentEmptyLineBefore.secondaryOptions.indexOf('ignore.after-comment') !== -1 ? 'good' : 'bad'",
+            :type="commentEmptyLineBefore.option === 'always' &amp;&amp; commentEmptyLineBefore.secondaryOptions.indexOf('ignore.after-comment') !== -1 ? 'success': 'error'",
+            :closable="false"
+            )
+              css-rule
+                template(slot="selector") a
+              br
+              comment
+              comment
 &nbsp;
-              el-alert(
-                :title="commentEmptyLineBefore.option === 'never' &amp;&amp; commentEmptyLineBefore.secondaryOptions.indexOf('ignore.after-comment') !== -1 ? 'good' : 'bad'",
-                :type="commentEmptyLineBefore.option === 'never' &amp;&amp; commentEmptyLineBefore.secondaryOptions.indexOf('ignore.after-comment') !== -1 ? 'success': 'error'",
-                :closable="false"
-              )
-                css-rule
-                  template(slot="selector") a
-                comment
+            el-alert(
+            :title="commentEmptyLineBefore.option === 'never' &amp;&amp; commentEmptyLineBefore.secondaryOptions.indexOf('ignore.after-comment') !== -1 ? 'good' : 'bad'",
+            :type="commentEmptyLineBefore.option === 'never' &amp;&amp; commentEmptyLineBefore.secondaryOptions.indexOf('ignore.after-comment') !== -1 ? 'success': 'error'",
+            :closable="false"
+            )
+              css-rule
+                template(slot="selector") a
+              comment
 &nbsp;
-              el-alert(
-                :title="commentEmptyLineBefore.option === 'always' &amp;&amp; commentEmptyLineBefore.secondaryOptions.indexOf('ignore.stylelint-commands') !== -1 ? 'good' : 'bad'",
-                :type="commentEmptyLineBefore.option === 'always' &amp;&amp; commentEmptyLineBefore.secondaryOptions.indexOf('ignore.stylelint-commands') !== -1 ? 'success' : 'error'",
-                :closable="false"
-              )
-                css-rule
-                  template(slot="selector") a
-                  template(slot="declaration-block")
-                    comment stylelint-disable line
-                    declaration-block(:properties="cssProperties")
+            el-alert(
+            :title="commentEmptyLineBefore.option === 'always' &amp;&amp; commentEmptyLineBefore.secondaryOptions.indexOf('ignore.stylelint-commands') !== -1 ? 'good' : 'bad'",
+            :type="commentEmptyLineBefore.option === 'always' &amp;&amp; commentEmptyLineBefore.secondaryOptions.indexOf('ignore.stylelint-commands') !== -1 ? 'success' : 'error'",
+            :closable="false"
+            )
+              css-rule
+                template(slot="selector") a
+                template(slot="declaration-block")
+                  comment stylelint-disable line
+                  declaration-block(:properties="cssProperties")
 &nbsp;
-              el-alert(
-                :title="commentEmptyLineBefore.option === 'never' &amp;&amp; commentEmptyLineBefore.secondaryOptions.indexOf('ignore.stylelint-commands') !== -1 ? 'good' : 'bad'",
-                :type="commentEmptyLineBefore.option === 'never' &amp;&amp; commentEmptyLineBefore.secondaryOptions.indexOf('ignore.stylelint-commands') !== -1 ? 'success' : 'error'",
-                :closable="false"
-              )
-                css-rule
-                  template(slot="selector") a
-                  template(slot="declaration-block")
-                    div Space
-                    comment stylelint-disable line
-                    declaration-block(:properties="cssProperties")
-&nbsp;
-&nbsp;
-&nbsp;
-          el-col(:span="12")
-            | https://medium.com/@kevin_peters/unit-testing-vue-js-components-with-jest-86e14ef499da
-            el-button(@click="handleChangingCssProperties") Reverse
+            el-alert(
+            :title="commentEmptyLineBefore.option === 'never' &amp;&amp; commentEmptyLineBefore.secondaryOptions.indexOf('ignore.stylelint-commands') !== -1 ? 'good' : 'bad'",
+            :type="commentEmptyLineBefore.option === 'never' &amp;&amp; commentEmptyLineBefore.secondaryOptions.indexOf('ignore.stylelint-commands') !== -1 ? 'success' : 'error'",
+            :closable="false"
+            )
+              css-rule
+                template(slot="selector") a
+                template(slot="declaration-block")
+                  div Space
+                  comment stylelint-disable line
+                  declaration-block(:properties="cssProperties")
 &nbsp;
 &lt;/template&gt;
 &nbsp;
@@ -766,12 +748,12 @@
 <span class="cstat-no" title="statement not covered" >  import CodeSnippet from '../components/CodeSnippet.vue'</span>
 <span class="cstat-no" title="statement not covered" >  import CssRule from '../components/CssRule'</span>
 <span class="cstat-no" title="statement not covered" >  import DeclarationBlock from '../components/DeclarationBlock'</span>
-<span class="cstat-no" title="statement not covered" >  import ElAlert from '../../node_modules/element-ui/packages/alert/src/main.vue'</span>
+<span class="cstat-no" title="statement not covered" >  import CommentNoEmpty from '../components/rule-comment/CommentNoEmpty'</span>
 &nbsp;
   export default {
     name: 'Index',
     components: {
-      ElAlert,
+      CommentNoEmpty,
       Comment,
       CodeSnippet,
       CssRule,
@@ -814,7 +796,7 @@
 </div><!-- /wrapper -->
 <div class='footer quiet pad2 space-top1 center small'>
   Code coverage
-  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Tue Jun 26 2018 20:13:49 GMT+0300 (EEST)
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Wed Jun 27 2018 15:10:52 GMT+0300 (EEST)
 </div>
 </div>
 <script src="../../prettify.js"></script>

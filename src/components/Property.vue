@@ -1,6 +1,6 @@
 <template lang="pug">
     span.property
-      span.property__indent
+      span.indent
       span.property__name {{ name }}
       mark(class="mark", v-if="indentBetweenColon", :style="indentBetweenColonStyles") &nbsp;
       span.property__colon :
@@ -8,8 +8,11 @@
       span.property__value {{ value }}
       span(class="property__important", v-if="isImportant") !important
       span(class="property__semicolon", v-if="isSemicolon") ;
-    </span>
 </template>
+
+<style lang="scss">
+
+</style>
 
 <script>
   export default {
@@ -59,9 +62,3 @@
     }
   }
 </script>
-
-<style scoped>
-  span {
-    font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
-  }
-</style>

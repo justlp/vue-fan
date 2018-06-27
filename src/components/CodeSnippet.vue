@@ -41,9 +41,15 @@
   @import "~element-ui/packages/theme-chalk/src/common/var";
 
   .code-snippet {
+    background-color: #282a36;
+    display: block;
+    color: #f8f8f2;
+    padding: $--alert-padding;
+    border-radius: $--alert-border-radius;
+    margin: 1rem 0;
 
     &--info {
-      color: $--color-text-primary;
+      color: $--color-text-secondary;
     }
     &--success{
       color: $--color-success;

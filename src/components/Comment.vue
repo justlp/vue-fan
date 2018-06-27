@@ -1,16 +1,24 @@
 <template lang="pug">
     pre.comment
       | /*
-      slot
+      slot {{ message }}
       | */
 </template>
 
 <script>
   export default {
     name: 'comment',
+    props: {
+      message: {
+        type: String
+      }
+    }
   }
 </script>
 
 <style lang="scss">
-
+  .comment {
+    display: inline-block;
+    margin: 0;
+  }
 </style>
