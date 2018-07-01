@@ -10,33 +10,9 @@
                 h3 comment-no-empty
                 comment-no-empty
 
-
-              el-tab-pane(label="User") d
-
-
-
-            hr
-
-            css-rule
-              template(slot="selector") a
-              template(slot="declaration-block")
-                declaration-block(:properties="cssProperties")
-
-            | Possible errors
-            | Comment
-            | if comment-no-empty = true/false
-
-
-
-
-
-
-            | Possible errors
-            | General / Sheet
-
-            el-radio-group(v-model="noInvalidDoubleSlashComments")
-              el-radio-button(:label="true")
-              el-radio-button(:label="false")
+              el-tab-pane(label="no-invalid-doubles-slash-comments")
+                h3 no-invalid-doubles-slash-comments
+                no-invalid-doubles-slash-comments
 
             el-alert(title="good", type="success", :closable="false")
               css-rule
@@ -203,13 +179,15 @@
   import Comment from '../components/Comment.vue'
   import CodeSnippet from '../components/CodeSnippet.vue'
   import CssRule from '../components/CssRule'
-  import DeclarationBlock from '../components/DeclarationBlock'
-  import CommentNoEmpty from '../components/rule-comment/CommentNoEmpty'
+  import DeclarationBlock from '../components/DeclarationBlock.vue'
+  import CommentNoEmpty from '../components/rule-comment/CommentNoEmpty.vue'
+  import NoInvalidDoublesSlashComments from '../components/rule-comment/NoInvalidDoublesSlashComments'
 
   export default {
     name: 'Index',
     components: {
       CommentNoEmpty,
+      NoInvalidDoublesSlashComments,
       Comment,
       CodeSnippet,
       CssRule,

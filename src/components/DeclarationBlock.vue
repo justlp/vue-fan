@@ -3,6 +3,7 @@
       property(v-for="(property, index) in properties",
         :key="index",
         :name="property.name",
+        :hasDoubleSlashComment="property.hasDoubleSlashComment",
         :value="property.value",
         :isImportant="property.isImportant",
         :isSemicolon="property.isSemicolon",
@@ -36,3 +37,12 @@
     }
   }
 </script>
+
+<style lang="scss">
+  .declaration-block {
+
+    .property {
+      display: block;
+    }
+  }
+</style>

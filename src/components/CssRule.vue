@@ -23,3 +23,17 @@
   }
 
 </script>
+
+<style lang="scss">
+  .css-rule {
+    &__selector{
+      display: inline-block;
+    }
+    &__braces{
+      display: inline-block;
+    }
+    &__declaration-block{
+      padding-left: 1rem;
+    }
+  }
+</style>

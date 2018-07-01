@@ -15,8 +15,13 @@
 </style>
 
 <script>
+  import Comment from '../components/Comment'
+
   export default {
     name: 'property',
+    components: {
+      Comment
+    },
     props: {
       name: {
         type: String,
