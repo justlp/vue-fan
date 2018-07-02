@@ -198,7 +198,6 @@
         commentNoEmpty: false,
         noInvalidDoubleSlashComments: false,
         commentWordBlacklist: false,
-        test: null,
         commentEmptyLineBefore: {
           option: 'never',
           secondaryOptions: []

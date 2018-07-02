@@ -6,26 +6,25 @@
       el-radio-button(:label="null") Disable
 
     code-snippet(language="css", :type="getSnippetType(false, commentNoEmpty)", ref="emptyNoSpace")
-      comment
+      comment(:modifier="['comment--color-inherited']")
 
     code-snippet(language="css", :type="getSnippetType(false, commentNoEmpty)", ref="emptyIncludeSpace")
-      comment(message=" ")
+      comment(message=" ", :modifier="['comment--color-inherited']")
 
     code-snippet(language="css", :type="getSnippetType(false, commentNoEmpty)", ref="emptyMultyline")
-      comment
+      comment(:modifier="['comment--color-inherited']")
         br
         span.empty &nbsp;
         br
 
     code-snippet(language="css", :type="getSnippetType(true, commentNoEmpty)", ref="commentIncludeSpace")
-      comment
+      comment(:modifier="['comment--color-inherited']")
         span.empty &nbsp;
         | comment
         span.empty &nbsp;
 
-    code-snippet(language="css", :type="getSnippetType(true, commentNoEmpty)", ref="commentMultyline")
-      comment(message="\n * Multi-line \Comment \n *")
-
+    code-snippet(language="css", :type="getSnippetType(true, commentNoEmpty)", ref="commentMultiline")
+      comment(:modifier="['comment--color-inherited']", message="\n * Multi-line \Comment \n *")
 </template>
 
 <script>

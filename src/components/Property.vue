@@ -11,7 +11,9 @@
 </template>
 
 <style lang="scss">
-
+  mark {
+    background: none;
+  }
 </style>
 
 <script>

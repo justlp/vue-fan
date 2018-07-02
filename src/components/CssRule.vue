@@ -13,11 +13,17 @@
 
   export default {
     name: 'css-rule',
+    props: {
+      modifier: {
+        type: Array
+      }
+    },
     computed: {
       classes () {
-        return [
-          `${blockCls}`
-        ]
+        let classes = [blockCls]
+        if (this.modifier) classes.push(this.modifier)
+
+        return classes
       }
     }
   }
